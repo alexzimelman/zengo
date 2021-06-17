@@ -1,7 +1,9 @@
 const express = require('express');
 const CoinsRouter = express.Router();
 const CoinController = require('../controllers/CoinController')
+const Validator = require('./ValidateRequest')
 const NO_COINS_ERR = 'Please choose at lease one coin'
+const NO_DATE_ERR = 'Please choose started date'
 
 function getCoinsPrices(req, res){
     try{
@@ -17,6 +19,6 @@ function getCoinsPrices(req, res){
     }
 }
 
-CoinsRouter.get('/prices', getCoinsPrices)
+CoinsRouter.get('/prices', Validator, getCoinsPrices)
 
 module.exports = () => {return CoinsRouter}

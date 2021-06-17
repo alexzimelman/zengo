@@ -1,6 +1,6 @@
 const Coin = require('../models/Coin')
 
-class RobotService {
+class CoinService {
     constructor() {
         this.coin = new Coin()
     }
@@ -9,4 +9,4 @@ class RobotService {
         return await this.coin.getPrice(params)
     }
 }
-module.exports = new RobotService();
+module.exports = new CoinService();

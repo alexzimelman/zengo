@@ -7,11 +7,17 @@ const DELETE = 'delete'
 class Http {
     constructor() {}
 
-    post(){}
-    put(){}
-    delete(){}
-    get(url, data){
-        return this.request(url, GET, data)
+    post(url, data){
+        return this.request(url, PUT, data)
+    }
+    put(url, data){
+        return this.request(url, PUT, data)
+    }
+    delete(url){
+        return this.request(url, DELETE)
+    }
+    get(url){
+        return this.request(url, GET)
     }
 
     request(url, method, data) {

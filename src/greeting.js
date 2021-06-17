@@ -12,7 +12,7 @@ module.exports =  `
             </div>
             <div style="width: 100%; text-align: center; margin-top: 0.8rem; font-size: 1.3rem; color: #efefef">
                 required params: coins and date. <br>
-                exmple query: https://radiant-shelf-78064.herokuapp.com/coins/prices?coins=BTC,ETH,BNB,DOGE&date=01/01/2020
+                exmple query: https://radiant-shelf-78064.herokuapp.com/api/coins/prices?coins=BTC,ETH,BNB,DOGE&date=01/01/2020
             </div>
             <div style="width: 100%; text-align: center; margin-top: 4rem; font-size: 1rem; color: #989898">
                 Alex Zimelman

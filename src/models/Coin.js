@@ -1,5 +1,5 @@
 const { Rational } = require('rational-arithmetic');
-const http = require('./Http')
+const http = require('../http/Http')
 
 class Coin {
     constructor() {

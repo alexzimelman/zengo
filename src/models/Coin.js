@@ -3,9 +3,6 @@ const http = require('./Http')
 
 class Coin {
     constructor() {
-        // this.apiKey = '53fb07201203be249192cc6dac26f19b7dac9ddb45d1cc17c6d13b05ef9af55c'
-        // this.todayBaseUrl = `https://min-api.cryptocompare.com/data/pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
-        // this.pastBaseUrl = `https://min-api.cryptocompare.com/data/pricehistorical?api_key=${this.apiKey}limit=1&tsyms=USD&`
         this.apiKey = process.env.API_KEY
         this.baseUrl = process.env.BASE_URL
         this.todayBaseUrl = this.baseUrl + `pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
@@ -37,13 +34,9 @@ class Coin {
                     Object.assign(pastPrices, price.data)
                 }
             })
-            let difference = []
-            coins.forEach( coin => {
-                let value = prices.length === 1 ? 0 : this.calcPercentage(pastPrices[coin][this.defaultCurrency], todayPrices[coin][this.defaultCurrency])
-                difference.push({
-                    value,
-                    label: coin + ':' + value + '%'
-                })
+            let difference = coins.map( coin => {
+                let value = this.calcPercentage(pastPrices[coin][this.defaultCurrency], todayPrices[coin][this.defaultCurrency])
+                return {value, label: coin + ':' + value + '%'}
             })
             return difference.sort((a, b) => b.value - a.value).map(coin => coin.label)
         }catch(e){

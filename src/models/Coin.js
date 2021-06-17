@@ -6,18 +6,13 @@ const GET = 'get'
 
 class Coin {
     constructor() {
-        // this.apiKey = '53fb07201203be249192cc6dac26f19b7dac9ddb45d1cc17c6d13b05ef9af55c'
-        // this.todayBaseUrl = `https://min-api.cryptocompare.com/data/pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
-        // this.pastBaseUrl = `https://min-api.cryptocompare.com/data/pricehistorical?api_key=${this.apiKey}limit=1&tsyms=USD&`
-        this.apiKey = process.env.API_KEY
-        this.baseUrl = process.env.BASE_URL
-        this.todayBaseUrl = this.baseUrl + `pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
-        this.pastBaseUrl = this.baseUrl + `pricehistorical?api_key=${this.apiKey}limit=1&tsyms=USD`
-        console.log("this.apiKey", this.apiKey)
-        console.log("this.baseUrl", this.baseUrl)
-        console.log("this.todayBaseUrl", this.todayBaseUrl)
-        console.log("this.pastBaseUrl", this.pastBaseUrl)
-        console.log("process.env.API_KEY", process.env.API_KEY, process.env.BASE_URL)
+        this.apiKey = '53fb07201203be249192cc6dac26f19b7dac9ddb45d1cc17c6d13b05ef9af55c'
+        this.todayBaseUrl = `https://min-api.cryptocompare.com/data/pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
+        this.pastBaseUrl = `https://min-api.cryptocompare.com/data/pricehistorical?api_key=${this.apiKey}limit=1&tsyms=USD&`
+        // this.apiKey = process.env.API_KEY
+        // this.baseUrl = process.env.BASE_URL
+        // this.todayBaseUrl = this.baseUrl + `pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
+        // this.pastBaseUrl = this.baseUrl + `pricehistorical?api_key=${this.apiKey}limit=1&tsyms=USD`
 
         this.defaultCurrency = 'USD'
     }
@@ -37,22 +32,26 @@ class Coin {
     }
 
     setPrices(coins, prices){
-        let todayPrices = prices[0].data
-        let pastPrices = {}
-        prices.forEach((price, index) => {
-            if(index > 0){
-                Object.assign(pastPrices, price.data)
-            }
-        })
-        let difference = []
-        coins.forEach( coin => {
-            let value = prices.length === 1 ? 0 : this.calcPercentage(pastPrices[coin][this.defaultCurrency], todayPrices[coin][this.defaultCurrency])
-            difference.push({
-                value,
-                label: coin + ':' + value + '%'
+        try{
+            let todayPrices = prices[0].data
+            let pastPrices = {}
+            prices.forEach((price, index) => {
+                if(index > 0){
+                    Object.assign(pastPrices, price.data)
+                }
             })
-        })
-        return difference.sort((a, b) => b.value - a.value).map(coin => coin.label)
+            let difference = []
+            coins.forEach( coin => {
+                let value = prices.length === 1 ? 0 : this.calcPercentage(pastPrices[coin][this.defaultCurrency], todayPrices[coin][this.defaultCurrency])
+                difference.push({
+                    value,
+                    label: coin + ':' + value + '%'
+                })
+            })
+            return difference.sort((a, b) => b.value - a.value).map(coin => coin.label)
+        }catch(e){
+            return e
+        }
     }
 }
 

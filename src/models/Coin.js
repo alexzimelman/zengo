@@ -13,6 +13,11 @@ class Coin {
         this.baseUrl = process.env.BASE_URL
         this.todayBaseUrl = this.baseUrl + `pricemulti?api_key=${this.apiKey}limit=1&tsyms=USD`
         this.pastBaseUrl = this.baseUrl + `pricehistorical?api_key=${this.apiKey}limit=1&tsyms=USD`
+        console.log("this.apiKey", this.apiKey)
+        console.log("this.baseUrl", this.baseUrl)
+        console.log("this.todayBaseUrl", this.todayBaseUrl)
+        console.log("this.pastBaseUrl", this.pastBaseUrl)
+        console.log("process.env.API_KEY", process.env.API_KEY, process.env.BASE_URL)
 
         this.defaultCurrency = 'USD'
     }

@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 
-const PORT = 8080
+const PORT = process.env.PORT
 
 const api = new express()
 api.use(bodyParser.json({limit: '50mb'}));

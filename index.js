@@ -11,4 +11,8 @@ api.listen(PORT, () => {
     console.log("api is up")
 });
 
+api.get('/', (req, res) => {
+    res.send(require('./src/greeting'));
+});
+
 api.use('/coins', require('./src/routes/CoinsRouter')());

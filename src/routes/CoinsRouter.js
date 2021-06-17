@@ -1,7 +1,7 @@
 const express = require('express');
 const CoinsRouter = express.Router();
 const CoinController = require('../controllers/CoinController')
-const NO_PARAMS_ERR = 'Please choose coins and date'
+const NO_PARAMS_ERR = 'Please choose coins and date. Make sure date is in the right format: MM/DD/YYYY .'
 
 async function getCoinsPrices(req, res){
     try{

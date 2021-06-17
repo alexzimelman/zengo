@@ -25,7 +25,7 @@ class Coin {
         let coins = params.coins.split(',')
         let promises = [http.get(this.todayBaseUrl + `&fsyms=${params.coins}`, null)]
         coins.forEach(coin => {
-            promises.push(http.get(this.pastBaseUrl + `fsym=${coin}` + `&ts=${new Date(params.date).getTime()/1000}`, GET, null))
+            promises.push(http.get(this.pastBaseUrl + `&fsym=${coin}` + `&ts=${new Date(params.date).getTime()/1000}`, GET, null))
         })
         let prices = await Promise.all(promises)
         return this.setPrices(coins, prices)
@@ -40,7 +40,6 @@ class Coin {
                     Object.assign(pastPrices, price.data)
                 }
             })
-            console.log("pastPrices", pastPrices)
             let difference = []
             coins.forEach( coin => {
                 let value = prices.length === 1 ? 0 : this.calcPercentage(pastPrices[coin][this.defaultCurrency], todayPrices[coin][this.defaultCurrency])
